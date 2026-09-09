@@ -12,7 +12,7 @@ from typing import Any
 
 IMAGE_COLUMNS = [
     "id_imagen", "longitud", "latitud", "fecha_captura_timestamp", "fecha_captura_utc",
-    "distrito", "angulo_camara", "id_secuencia", "url_miniatura", "tipo_camara", "marca", "modelo",
+    "distrito", "zona_estudio", "angulo_camara", "id_secuencia", "url_miniatura", "tipo_camara", "marca", "modelo",
     "es_panoramica", "calidad", "cantidad_objetos_detectados",
 ]
 
@@ -46,7 +46,7 @@ def main() -> None:
             image_writer.writerow({
                 "id_imagen": properties.get("id_imagen"), "longitud": coordinates[0], "latitud": coordinates[1],
                 "fecha_captura_timestamp": timestamp, "fecha_captura_utc": as_utc(timestamp),
-                "distrito": properties.get("distrito"), "angulo_camara": properties.get("angulo_camara"), "id_secuencia": properties.get("id_secuencia"),
+                "distrito": properties.get("distrito"), "zona_estudio": properties.get("zona_estudio"), "angulo_camara": properties.get("angulo_camara"), "id_secuencia": properties.get("id_secuencia"),
                 "url_miniatura": properties.get("url_miniatura"), "tipo_camara": properties.get("tipo_camara"),
                 "marca": properties.get("marca"), "modelo": properties.get("modelo"),
                 "es_panoramica": properties.get("es_panoramica"), "calidad": properties.get("calidad"),

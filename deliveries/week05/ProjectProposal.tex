@@ -38,9 +38,9 @@ La visualización estará dirigida a estudiantes e investigadores de urbanismo, 
 
 \textbf{¿Por qué visualizarlo?} El fenómeno es simultáneamente espacial, categórico y temporal: miles de imágenes, sus ubicaciones, sus fechas y los elementos detectados no se entienden en una tabla. Un mapa interactivo permite comparar ambas zonas, filtrar categorías y abrir la imagen que sostiene cada observación. Esto vuelve trazable la discusión: el usuario puede pasar de un patrón agregado a la evidencia visual concreta.
 
-\section*{2. Dataset y metodología propuesta}
+\section*{2. Dataset recolectado y metodología}
 
-El dataset principal será reconstruido para esta propuesta. Se recolectarán imágenes georreferenciadas mediante la \textit{Mapillary Graph API} en \textbf{tres zonas de estudio equivalentes por distrito}, usando la misma cuadrícula, tamaño de celda, límite de imágenes y reglas de deduplicación. Trabajar con zonas comparables, en vez de descargar por completo ambos distritos, mantiene el alcance realizable y evita que el tamaño desigual de San Juan de Lurigancho domine la comparación.
+El dataset principal ya fue recolectado mediante la \textit{Mapillary Graph API} en \textbf{tres zonas de estudio por distrito}, usando la misma cuadrícula de 0,005°, límite de 300 imágenes, reintentos y reglas de deduplicación. El release final contiene \textbf{676 imágenes únicas}, \textbf{146 secuencias}, \textbf{12,276 filas de detecciones} y \textbf{129 etiquetas}. Se retuvieron 457 imágenes de San Isidro y 219 de San Juan de Lurigancho. Trabajar con zonas comparables, en vez de descargar los distritos completos, mantiene el alcance realizable y evita que el tamaño desigual de San Juan de Lurigancho domine la comparación.
 
 \begin{tabularx}{\linewidth}{@{}p{0.24\linewidth}X@{}}
 \toprule
@@ -53,7 +53,7 @@ OpenStreetMap (si se incorpora) & Red vial como denominador complementario para 
 \bottomrule
 \end{tabularx}
 
-La tabla principal tendrá una fila por imagen; una tabla relacionada agregará las detecciones por \texttt{id\_imagen} y categoría. Las categorías se agruparán en: infraestructura peatonal (vereda, cruce cebra, rebaje), regulación vial (señales, semáforos, marcas), soporte urbano (postes e iluminación), movilidad y entorno. Antes del análisis se eliminarán IDs duplicados, se validará la geometría, se normalizarán fechas y categorías, y se registrará la cobertura temporal.
+La tabla principal contiene una fila por imagen y una tabla relacionada agrega las detecciones por \texttt{id\_imagen} y categoría. Las categorías se agruparán en: infraestructura peatonal (vereda, cruce cebra, rebaje), regulación vial (señales, semáforos, marcas), soporte urbano (postes e iluminación), movilidad y entorno. Ya se eliminaron IDs duplicados y se validó la geometría contra los límites oficiales; el siguiente paso es normalizar categorías y presentar la cobertura temporal.
 
 \textbf{Límite central.} Una detección automática en una imagen es evidencia de que un elemento fue observado desde ese punto de vista; su ausencia no demuestra que el elemento no exista ni mide su estado físico. Por ello, los indicadores se expresarán por 100 imágenes o por tramo cuando corresponda, y cada resultado podrá inspeccionarse mediante su imagen de origen.
 
@@ -70,6 +70,6 @@ La tabla principal tendrá una fila por imagen; una tabla relacionada agregará 
 
 \section*{4. Factibilidad, plan y riesgos}
 
-El equipo reutilizará el proceso de adquisición ya desarrollado, pero con una cuadrícula simétrica y un diccionario adaptado al nuevo objetivo. Jeffry Arturo Hilario Quintana liderará la adquisición, limpieza y trazabilidad; Jeffry Vargas la preparación espacial, comparación y visualización; y Fatima Margarita Villon Zarate la narrativa, experiencia de usuario y evaluación. El mayor riesgo es la cobertura desigual de Mapillary o respuestas inestables de la API. Se mitigará con subconsultas, reintentos, un registro de adquisición, reglas de exclusión explícitas y normalización por imágenes/tramos. La entrega posterior incluirá una interfaz D3 con mapa, filtros por categoría y fecha, comparación entre zonas e inspección de evidencia.
+La adquisición ya fue completada con una cuadrícula simétrica y bitácora reproducible. Jeffry Arturo Hilario Quintana liderará limpieza y trazabilidad; Jeffry Vargas la preparación espacial, comparación y visualización; y Fatima Margarita Villon Zarate la narrativa, experiencia de usuario y evaluación. El mayor riesgo sigue siendo la cobertura desigual de Mapillary y la interpretación excesiva de detecciones automáticas. Se mitigará con tasas por imágenes/tramos, reglas de exclusión explícitas y visualización de cada imagen de origen. La entrega posterior incluirá una interfaz D3 con mapa, filtros por categoría y fecha, comparación entre zonas e inspección de evidencia.
 
 \end{document}

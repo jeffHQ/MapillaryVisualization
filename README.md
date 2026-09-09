@@ -2,21 +2,20 @@
 
 Proyecto de visualización para DS5343 — Data Visualization.
 
-El proyecto analiza la cobertura, actualidad y calidad de las imágenes de
-Mapillary en el corredor urbano **Magdalena del Mar – San Isidro – Miraflores**.
-La unidad principal de análisis es una imagen georreferenciada. Las detecciones
-de infraestructura se analizan como una tabla relacionada por identificador de
-imagen.
+El proyecto explora la evidencia visual de infraestructura urbana en zonas
+comparables de **San Isidro** y **San Juan de Lurigancho**, dos contextos
+socioeconómicos contrastantes de Lima Metropolitana. La unidad principal de
+análisis es una imagen georreferenciada; las detecciones de infraestructura se
+analizan como una tabla relacionada por identificador de imagen.
 
 ## Alcance actual
 
-El dataset principal ya está consolidado: contiene **9,938 imágenes
-georreferenciadas**, sin identificadores duplicados y recortadas espacialmente
-a los tres distritos del corredor. Proviene de 18 celdas de consulta y contiene
-1,915 secuencias y 166,475 filas agregadas de detecciones. La muestra piloto
-de 10 imágenes de Magdalena se conserva solamente para validar y documentar el
-esquema de datos; no representa el dataset final. La adquisición se ejecuta
-sin subir credenciales al repositorio.
+El dataset principal ya está consolidado: contiene **676 imágenes
+georreferenciadas**, sin identificadores duplicados, de seis zonas de estudio
+(tres por distrito). Contiene 146 secuencias y 12,276 filas agregadas de
+detecciones. La comparación se hará con tasas normalizadas por imagen y cada
+patrón podrá revisarse con la evidencia visual de origen. La adquisición se
+ejecuta sin subir credenciales al repositorio.
 
 ## Entregables
 

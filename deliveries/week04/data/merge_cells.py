@@ -40,6 +40,7 @@ def main() -> None:
     for file in files:
         collection = json.loads(file.read_text(encoding="utf-8"))
         sources.append(file.name)
+        study_zone = collection.get("metadata", {}).get("cell_id", file.stem)
         for feature in collection.get("features", []):
             image_id = feature.get("properties", {}).get("id_imagen")
             if not image_id or image_id in seen:
@@ -50,6 +51,7 @@ def main() -> None:
                 continue
             seen.add(image_id)
             feature.setdefault("properties", {})["distrito"] = district
+            feature["properties"]["zona_estudio"] = study_zone
             features.append(feature)
     payload = {
         "type": "FeatureCollection",

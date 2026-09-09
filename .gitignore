@@ -8,3 +8,5 @@ __pycache__/
 *.toc
 deliveries/week04/data/raw_cells/
 deliveries/week04/data/token_test.geojson
+deliveries/week04/data/contrast_lima/screening_raw/
+deliveries/week04/data/contrast_lima/raw_cells/

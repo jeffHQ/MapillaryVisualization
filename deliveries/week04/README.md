@@ -1,146 +1,77 @@
-# Week 4 — Dataset Selection and Submission
+# Week 4 — Selección y documentación del dataset
 
-## Dataset title
+## Dataset seleccionado
 
-**Mapillary image coverage, capture quality and detected urban infrastructure
-in the Magdalena del Mar – San Isidro – Miraflores corridor, Lima, Peru.**
+**Una Lima, dos realidades: evidencia visual de infraestructura urbana en zonas comparables de San Isidro y San Juan de Lurigancho.**
 
-## Source and collector
+## Fuente y acceso
 
-- **Source:** [Mapillary Graph API](https://www.mapillary.com/developer/api-documentation).
-- **Collector:** Mapillary contributors; original captures are uploaded by its
-  contributor community and made available through Mapillary.
-- **Access date:** 2026-09-09.
-- **Access method:** authenticated API requests with a Mapillary client access
-  token held locally by the team.
+- **Fuente principal:** [Mapillary Graph API](https://www.mapillary.com/developer/api-documentation).
+- **Recolectores originales:** contribuyentes de Mapillary. El equipo conserva metadatos y URLs de miniatura de la API; no descarga ni redistribuye binarios de imágenes.
+- **Acceso y colección:** 2026-09-09, mediante Client Token local en `MAPILLARY_ACCESS_TOKEN`.
+- **Contexto territorial:** límites distritales del geoservidor público MINAM/INEI y [Mapa de Pobreza Provincial y Distrital 2013 de INEI](https://www.inei.gob.pe/media/DocumentosPublicos/pobreza/2013/Mapa-de-pobreza-provincial-y-distrital-2013.pdf).
 
-## Why this dataset is useful
+## Problema y unidad de análisis
 
-The data connect location, capture time, sequence, camera characteristics,
-image quality, and AI detections. They support a coordinated spatial,
-temporal, and multivariate analysis rather than a single map of points.
+El dataset permite explorar cómo aparece la evidencia visual de elementos peatonales y viales —veredas, cruces, señales, iluminación y marcas— en dos contextos socioeconómicos contrastantes de Lima Metropolitana. No se usa para calificar personas, afirmar causalidad ni certificar el estado físico de una calle. La ausencia de una detección no prueba que la infraestructura no exista.
 
-## Scope and unit of analysis
+La unidad de análisis es una **imagen georreferenciada**. Una tabla relacionada almacena cada etiqueta de objeto detectada y su conteo por imagen. La variable `zona_estudio` conserva la trazabilidad de las seis áreas muestreadas.
 
-The final study area is the urban corridor formed by Magdalena del Mar, San
-Isidro, and Miraflores. One record in the main table represents one Mapillary
-image. A second table aggregates detected-object labels by image. Official
-district boundaries are used to retain only images within the study area.
+## Cobertura y diseño de muestra
 
-The included `data/sample.geojson` and `data/sample.csv` are a **pilot sample**
-of 10 images from Magdalena. They validate the schema and acquisition process;
-they must not be interpreted as coverage of all Lima or of the three-district
-corridor.
+No se descargaron los distritos completos: San Juan de Lurigancho tiene una extensión muy superior a San Isidro. Se definieron tres ventanas urbanas de 0,005° por 0,005° en cada distrito y se consultaron con la misma cuadrícula, límite de 300 imágenes, reintentos y reglas de deduplicación. Una cuarta zona de San Isidro se evaluó y descartó porque no tuvo cobertura; su alternativa queda documentada en `study_zones.csv`.
 
-## Geographic and temporal coverage
+| Distrito | Zona de estudio | Imágenes | Secuencias |
+| --- | --- | ---: | ---: |
+| San Isidro | `san_isidro_01` | 26 | 9 |
+| San Isidro | `san_isidro_03` | 331 | 65 |
+| San Isidro | `san_isidro_alt_01` | 100 | 35 |
+| San Juan de Lurigancho | `san_juan_lurigancho_01` | 27 | 10 |
+| San Juan de Lurigancho | `san_juan_lurigancho_02` | 93 | 10 |
+| San Juan de Lurigancho | `san_juan_lurigancho_03` | 99 | 17 |
 
-- **Target geographic coverage:** Magdalena del Mar, San Isidro, and Miraflores,
-  Lima, Peru, collected through a reproducible grid of small bounding-box
-  requests.
-- **Pilot geographic coverage:** a small area in Magdalena near longitude
-  -77.0627 to -77.0621 and latitude -12.0940 to -12.0933.
-- **Pilot temporal coverage:** 2024-10-05 19:19:19 to 19:56:06 UTC.
-- **Collected temporal coverage:** 2015-04-02 to 2026-08-19 UTC.
+El release consolidado contiene **676 imágenes únicas**, **146 secuencias**, **12,276 filas agregadas de detecciones** y **129 etiquetas distintas**. No tiene IDs duplicados, fechas de captura faltantes ni imágenes fuera de los dos límites oficiales. Se retuvieron 457 imágenes de San Isidro y 219 de San Juan de Lurigancho. Las fechas de captura van de 2016-04-16 a 2024-11-29; esta heterogeneidad temporal será visible en la interfaz y tratada como limitación.
 
-## Current collected release
+Los totales brutos no se interpretarán como una ventaja o desventaja urbana. La comparación se hará con tasas por 100 imágenes y, si se integra la red vial, por tramo de calle.
 
-The documented 18-cell grid was collected and merged on 2026-09-09. After
-de-duplicating by image identifier and clipping points to the three official
-district boundaries, the analytical dataset contains **9,938 images**, **1,915
-capture sequences**, and **166,475 aggregated image/object-label rows**.
+## Archivos de datos
 
-| District | Images retained |
-| --- | ---: |
-| Magdalena del Mar | 928 |
-| San Isidro | 4,697 |
-| Miraflores | 4,313 |
-
-The raw API cells contained 10,506 unique image IDs before the spatial clip;
-568 points outside the official study-area boundaries were excluded. This
-prevents a bounding-box edge from being misclassified as one of the districts.
-
-## Data files
-
-| File | Purpose |
+| Archivo | Contenido |
 | --- | --- |
-| `data/sample.geojson` | Original pilot response transformed to a GeoJSON FeatureCollection. |
-| `data/sample.csv` | One row per pilot image, suitable for tabular inspection. |
-| `data/detections_sample.csv` | One row per image/object label after aggregation of repeated detections. |
-| `data/mapillary_corridor_images.geojson` | Final, de-duplicated and spatially clipped dataset of 9,938 images. |
-| `data/images.csv` | Final table with one row per retained Mapillary image. |
-| `data/detections.csv` | Final related table of aggregated object labels by image. |
-| `data/data_dictionary.csv` | Field definitions, types, formats, and missing-value handling. |
-| `data/acquisition.py` | Reproducible API extraction script; it never stores a token in code. |
-| `data/build_sample_tables.py` | Converts a GeoJSON extraction into the two CSV tables. |
-| `data/acquisition_log.csv` | Template for recording every grid-cell query and its outcome. |
-| `data/district_boundaries.geojson` | Official reference boundaries for the three study districts. |
-| `data/acquisition_grid.csv` | Automatically generated small bounding boxes used for API queries. |
-| `data/collect_grid.py` | Resumable collector that saves one response per grid cell and logs results. |
-| `data/merge_cells.py` | Combines cell files and de-duplicates the final GeoJSON by image ID. |
+| `data/contrast_lima/lima_contrast_images.geojson` | Dataset principal deduplicado, recortado a los límites y enriquecido con distrito y zona de estudio. |
+| `data/contrast_lima/images.csv` | Una fila por imagen del dataset principal. |
+| `data/contrast_lima/detections.csv` | Una fila por combinación imagen–etiqueta, con el conteo agregado. |
+| `data/contrast_lima/district_boundaries.geojson` | Límites oficiales de los dos distritos. |
+| `data/contrast_lima/study_zones.csv` | Seis zonas seleccionadas, alternativa y zona excluida, con bboxes y justificación. |
+| `data/contrast_lima/acquisition_grid.csv` | Las seis consultas definitivas usadas para recolectar. |
+| `data/sample.geojson` / `data/sample.csv` | Muestra reproducible y balanceada: dos imágenes por cada zona. |
+| `data/detections_sample.csv` | Etiquetas y conteos correspondientes a la muestra de 12 imágenes. |
+| `data/data_dictionary.csv` | Diccionario de atributos de las tablas y GeoJSON. |
+| `data/contrast_lima/acquisition_log.csv` | Bitácora de las seis consultas definitivas. |
 
-## License, terms, and limitations
+Las respuestas crudas de API se guardan en `contrast_lima/raw_cells/`; se excluyen de Git porque son reproducibles y no son necesarias para explorar las tablas finales.
 
-Mapillary data are accessed under the applicable
-[Mapillary Terms of Use](https://www.mapillary.com/legal/terms) and API
-conditions. The final visualization will visibly attribute Mapillary and link
-to its website. The team will not redistribute image binaries, expose private
-information, or commit access tokens.
+## Calidad, licencia y límites
 
-Coverage is contributor-generated, so it is not a census of streets or urban
-infrastructure. Capture density, device type, dates, and AI detections can be
-uneven or missing. Object labels can repeat within an image; therefore the
-related detections table stores both the raw count and the aggregated count.
+La colección se deduplicó por `id_imagen`, se asignó cada punto con point-in-polygon contra límites oficiales y se conservaron fechas, secuencias, calidad y zona de origen. Mapillary es una plataforma colaborativa: la cobertura depende de contribuyentes, dispositivos, fechas y comportamiento de la API. Las detecciones son automáticas y pueden tener falsos positivos, falsos negativos o repeticiones. La visualización mostrará la fotografía subyacente junto con los agregados y sus límites.
 
-## Reproducible acquisition
+Los datos se usan bajo los [Términos de Mapillary](https://www.mapillary.com/legal/terms). La visualización final atribuirá Mapillary; no expondrá tokens ni redistribuirá binarios de imágenes.
 
-1. Install Python 3.10+ and dependencies:
+## Reproducción
 
-   ```powershell
-   python -m pip install -r data/requirements.txt
-   ```
-
-2. Set the token only in the current local shell:
-
-   ```powershell
-   $env:MAPILLARY_ACCESS_TOKEN = 'MLY|...'
-   ```
-
-3. Query one small bounding box and write a raw GeoJSON extraction:
-
-   ```powershell
-   python data/acquisition.py --bbox=<min_lon,min_lat,max_lon,max_lat> --output data/raw_cell.geojson --max-images 500
-   ```
-
-4. Convert the resulting GeoJSON into image and detections tables:
-
-   ```powershell
-   python data/build_sample_tables.py --input data/raw_cell.geojson --images data/images.csv --detections data/detections.csv
-   ```
-
-Repeat step 3 for documented grid cells within the three target districts, then
-merge and de-duplicate by `id_imagen`. Record every queried cell, date, result
-count, and error in the acquisition log before making analytical claims.
-
-The district boundaries are downloaded from the public MINAM geoserver and the
-query grid is generated with:
+Desde `deliveries/week04`, con Python 3.10+ y el token configurado únicamente en la ventana local de PowerShell:
 
 ```powershell
-python data/download_boundaries.py
-python data/prepare_grid.py --cell-size 0.01
+python -m pip install -r data/requirements.txt
+$env:MAPILLARY_ACCESS_TOKEN = (Get-Clipboard).Trim()
+
+python data/download_boundaries.py --district "SAN ISIDRO" --district "SAN JUAN DE LURIGANCHO" --output data/contrast_lima/district_boundaries.geojson
+python data/contrast_lima/build_collection_grid.py --status selected --output data/contrast_lima/acquisition_grid.csv
+python data/collect_grid.py --grid data/contrast_lima/acquisition_grid.csv --output-dir data/contrast_lima/raw_cells --log data/contrast_lima/acquisition_log.csv --max-images 300 --pause 1 --timeout 45
+python data/merge_cells.py --input-dir data/contrast_lima/raw_cells --boundaries data/contrast_lima/district_boundaries.geojson --output data/contrast_lima/lima_contrast_images.geojson
+python data/build_sample_tables.py --input data/contrast_lima/lima_contrast_images.geojson --images data/contrast_lima/images.csv --detections data/contrast_lima/detections.csv
+python data/contrast_lima/export_sample.py --input data/contrast_lima/lima_contrast_images.geojson --output data/sample.geojson --per-zone 2
+python data/build_sample_tables.py --input data/sample.geojson --images data/sample.csv --detections data/detections_sample.csv
 ```
 
-Start with one cell per district to validate the collection, then run the full
-grid. The commands must be executed in the same PowerShell window in which
-`MAPILLARY_ACCESS_TOKEN` was set:
-
-```powershell
-python data/collect_grid.py --district "MAGDALENA DEL MAR" --limit-cells 1 --max-images 100
-python data/collect_grid.py --district "SAN ISIDRO" --limit-cells 1 --max-images 100
-python data/collect_grid.py --district "MIRAFLORES" --limit-cells 1 --max-images 100
-python data/merge_cells.py
-python data/build_sample_tables.py --input data/mapillary_corridor_images.geojson --images data/images.csv --detections data/detections.csv
-```
-
-The collector retries server-side failures and, when a dense cell times out,
-automatically divides it into boxes as small as 0.0025 degrees. This preserves
-the original study grid while adapting to Mapillary response limits.
+El recolector reintenta errores 5xx y subdivide una celda densa hasta 0,0025°. Los errores y conteos por celda quedan registrados sin revelar credenciales.

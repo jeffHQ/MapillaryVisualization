@@ -33,15 +33,16 @@ explore how evidence of pedestrian and road infrastructure appears across a
 socioeconomically contrasting urban context, and to let users inspect the
 images behind every aggregated pattern.
 
-## Dataset plan
+## Dataset status
 
-The main dataset will be rebuilt after Week 5 using the same Mapillary
-collection pipeline with a symmetric sampling protocol: three equivalent study
-zones per district, fixed query grid, identical limits and logged retries. It
-will combine Mapillary image metadata and object detections with official
-district boundaries and an INEI socioeconomic context indicator. The previous
-Magdalena–San Isidro–Miraflores dataset is retained in Week 4 only as previous
-work; it is not claimed as the dataset for this proposal.
+The main dataset was collected after the proposal design using a symmetric
+protocol: three study zones per district, fixed 0.005° query grid, identical
+image limits and logged retries. It contains 676 unique Mapillary images (457
+from San Isidro and 219 from San Juan de Lurigancho), 146 capture sequences and
+12,276 aggregated image/object-label rows. It combines image metadata and
+object detections with official district boundaries and an INEI socioeconomic
+context indicator. The previous Magdalena–San Isidro–Miraflores dataset is
+legacy work only and is not claimed as the dataset for this proposal.
 
 ## Relevant links
 
