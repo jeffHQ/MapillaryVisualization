@@ -1,152 +1,69 @@
-\documentclass[11pt,a4paper]{article}
-\usepackage[utf8]{utf8}
+\documentclass[aspectratio=169,10pt]{beamer}
+\usetheme{default}
+\usecolortheme{default}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
-\usepackage[margin=2.2cm]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{xcolor}
-\usepackage{hyperref}
 \usepackage{booktabs}
-\usepackage{array}
-\usepackage{enumitem}
-\usepackage{titlesec}
-\usepackage{fancyhdr}
-
-% Definición de colores académicos
-\definecolor{primary}{RGB}{3, 102, 214}
-\definecolor{secondary}{RGB}{36, 41, 46}
-\definecolor{lightbg}{RGB}{241, 248, 255}
-\definecolor{bordercolor}{RGB}{200, 225, 255}
-\definecolor{codebg}{RGB}{239, 243, 246}
-
-% Configuración de Hyperref
-\hypersetup{
-    colorlinks=true,
-    linkcolor=primary,
-    citecolor=primary,
-    urlcolor=primary
-}
-
-% Formato de secciones
-\titleformat{\section}
-  {\color{primary}\large\bfseries\uppercase}
-  {\thesection.}{0.5em}{}[\titlerule]
-
-\titleformat{\subsection}
-  {\color{secondary}\bfseries}
-  {\thesubsection}{0.5em}{}
-
-% Encabezado y pie de página
-\pagestyle{fancy}
-\fancyhf{}
-\lhead{\small\color{gray}Propuesta de Proyecto — Equipo DINAMITA}
-\rhead{\small\color{gray}Week 5 Proposal}
-\cfoot{\small\color{gray}\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-
-\setlength{\parskip}{0.6em}
-\setlength{\parindent}{0pt}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{structure}{fg=blue!65!black}
+\title{Cobertura, actualidad y calidad de imágenes urbanas de Mapillary}
+\subtitle{Corredor Magdalena del Mar -- San Isidro -- Miraflores}
+\author{Equipo DINAMITA: Jeffry Arturo Hilario Quintana, Jeffry Vargas, Fatima Margarita Villon Zarate}
+\date{Week 5 -- DS5343 Data Visualization}
 
 \begin{document}
+\begin{frame}\titlepage\end{frame}
 
-% Header Banner
-\begin{center}
-    {\color{primary}\small\textbf{VISUAL ANALYTICS \& SPATIAL DATA --- WEEK 5 PROPOSAL}}\\[0.3em]
-    {\Large\bfseries Evaluación de la Cobertura Geoespacial, Evolución Temporal y Calidad de Captura Visual Urbana mediante Mapillary Graph API v4 en Lima Metropolitana}\\[1em]
-\end{center}
-
-\begin{tabular}{|p{0.18\textwidth}p{0.32\textwidth}|p{0.15\textwidth}p{0.25\textwidth}|}
-\hline
-\rowcolor{lightbg} \textbf{Equipo:} & DINAMITA & \textbf{Fecha:} & 9 de Septiembre, 2026 \\
-\textbf{Integrantes:} & Jeffry Arturo Hilario Q. & \textbf{Entregable:} & \texttt{deliveries/week05/} \\
- & Jeffry Vargas & \textbf{Archivo:} & \texttt{ProjectProposal.tex} \\
- & Fatima Margarita Villon Z. & \textbf{Repositorio:} & \url{https://github.com/jeffHQ/MapillaryVisualization} \\
-\hline
-\end{tabular}
-
-\vspace{1em}
-
-\section{Miembros del Equipo y Título del Trabajo}
-\textbf{Nombre del Equipo:} No tenemos nombre profesor \\[0.3em]
-\textbf{Título del Proyecto:} Evaluación de la Cobertura Geoespacial, Evolución Temporal y Calidad de Captura Visual Urbana mediante Mapillary Graph API v4 en Lima Metropolitana \\[0.3em]
-\textbf{Integrantes y Responsabilidades:}
-\begin{itemize}[noitemsep]
-    \item \textbf{Jeffry Arturo Hilario Quintana} 
-    \item \textbf{Jeffry Vargas}
-    \item \textbf{Fatima Margarita Villon Zarate}
+\begin{frame}{Problema y motivación}
+\begin{itemize}
+  \item Lima cuenta con imágenes colaborativas a nivel de calle, pero su cobertura y actualidad son desiguales.
+  \item Planificadores urbanos y contribuidores de OpenStreetMap necesitan reconocer vacíos de información y datos desactualizados.
+  \item El proyecto convierte metadatos de Mapillary en evidencia espacial, temporal y de calidad de captura.
 \end{itemize}
+\end{frame}
 
-\section{Planteamiento del Problema y Contexto}
-\textbf{Problema:} El creciente interés por el análisis geoespacial urbano y la visión por computadora en Lima contrasta notablemente con la falta de evaluaciones sistemáticas sobre la densidad, actualización temporal y calidad de las plataformas de mapeo colaborativo abierto. Actualmente, no se conoce con precisión cómo se distribuye la cobertura geográfica de las secuencias a nivel de calle en zonas representativas de Lima, ni la diversidad de dispositivos utilizados para su captura.
+\begin{frame}{Audiencia y propósito}
+\textbf{Audiencia:} planificadores urbanos, gestores municipales, investigadores de movilidad y contribuidores de OpenStreetMap.\medskip
 
-\textbf{Importancia:} Para la planificación urbana participativa, la gestión e inventariado de infraestructura vial, y la actualización de plataformas fundamentales como OpenStreetMap (OSM), es crucial diagnosticar dónde existen vacíos de información críticos (\textit{data voids}), qué áreas cuentan con datos obsoletos y cuál es la calidad promedio del material capturado voluntariamente por la comunidad.
+\textbf{Propósito:} permitir explorar dónde, cuándo y con qué calidad se han capturado imágenes urbanas en el corredor de estudio, para identificar sectores prioritarios de actualización.
+\end{frame}
 
-\textbf{Contexto:} Mapillary (Meta Platforms, Inc.) permite a usuarios e instituciones subir imágenes georreferenciadas a nivel de calle. Mediante su \textbf{Graph API v4}, es posible extraer capas vectoriales y metadatos detallados de cada fotografía tomada en la vía pública, habilitando la auditoría de calidad y la detección automatizada de infraestructura urbana.
-
-\section{Público Objetivo y Propósito}
-\textbf{Público Objetivo:} Planificadores urbanos, gestores de infraestructura municipal, investigadores en movilidad sustentable y contribuidores de la comunidad OpenStreetMap.
-
-\textbf{Propósito:} Proveer un entorno analítico interactivo para explorar la distribución espacial y temporal de las capturas en Lima e identificar vacíos de datos prioritarios para campañas de mapeo.
-\newpage
-
-\section{Conjunto de Datos (Dataset Description)}
-\textbf{Fuente y Recolección:} Datos extraídos de la \textit{Mapillary Graph API v4 (Meta Platforms, Inc.)}. La recolección es efectuada por una comunidad abierta de colaboradores independientes, ciclistas, peatones e instituciones locales en Lima mediante smartphones (Android/iOS), cámaras de acción (GoPro) y cámaras panorámicas de $360^\circ$ montadas en cascos, bicicletas o vehículos en movimiento.
-
-\vspace{0.5em}
-\textbf{Atributos Relevantes (API v4):}
-\vspace{0.3em}
-
-\begin{small}
-\begin{tabular}{llp{8cm}}
-\toprule
-\textbf{Atributo} & \textbf{Tipo de Dato} & \textbf{Descripción y Relevancia Analítica} \\
-\midrule
-\texttt{id} / \texttt{geometry} & String / GeoJSON Point & Identificador único de la toma y coordenadas GPS primarias ($\text{lon}, \text{lat}$). \\
-\texttt{computed\_geometry} & GeoJSON Point & Coordenadas corregidas mediante algoritmos de visión por computadora (SfM). \\
-\texttt{captured\_at} & BigInt (Unix ms) & Fecha y hora exacta UTC de captura para análisis de antigüedad y tendencias temporales. \\
-\texttt{compass\_angle} & Float ($0^\circ - 360^\circ$) & Ángulo de orientación de la cámara para renderizado de vectores de vista. \\
-
-\colorbox{yellow!30}{\texttt{sequence}} & String (Hash) & Identificador del trayecto o secuencia continua al que pertenece la fotografía. \\
-
-\texttt{make} / \texttt{model} & String & Marca y modelo del dispositivo utilizado (ej. Samsung, GoPro, Garmin). \\
-\texttt{is\_pano} & Boolean & Indicador de si la imagen es una toma panorámica de $360^\circ$. \\
-\texttt{quality\_score} & Float ($0.0 - 1.0$) & Puntuación de calidad de imagen estimada por los algoritmos de Mapillary. \\
-% Con fondo amarillo usando \colorbox
-\colorbox{yellow!30}{\texttt{detections.values}} & Array of Strings & Objetos y señales detectados... \\
-\texttt{thumb\_1024\_url} & String (URL) & Enlace CDN a la miniatura de la imagen para inspección visual directa. \\
-\bottomrule
-\end{tabular}
-\end{small}
-
-\vspace{0.8em}
-\textbf{Data Quality Issues \& Acceso:}
-\begin{itemize}[noitemsep]
-    \item \textbf{Problemas de Calidad:} Ocurrencia de etiquetas repetidas en el arreglo \texttt{detections.value} para una misma imagen (ej. múltiples apariciones de \texttt{nature--sky} o \texttt{construction--barrier--wall}).
-    \item \textbf{Condiciones de Acceso:} Acceso público y gratuito mediante \textit{Client Access Token} para fines académicos. La API impone paginación estricta con lotes pequeños (\texttt{limit=100}) para consultas complejas de detección.
+\begin{frame}{Dataset principal propuesto}
+\begin{itemize}
+  \item Área: Magdalena del Mar, San Isidro y Miraflores.
+  \item Fuente: Mapillary Graph API; recolección reproducible mediante cuadrícula de cajas pequeñas.
+  \item Colección actual: 18 celdas, 9,938 imágenes válidas y 1,915 secuencias.
+  \item Periodo disponible: abril de 2015 a agosto de 2026.
+  \item Tabla de detecciones: etiqueta de objeto y frecuencia por imagen.
+  \item Capa de referencia: límites distritales.
 \end{itemize}
+\end{frame}
 
-\textbf{Preprocesamiento Esperado:}
-\begin{enumerate}[noitemsep]
-    \item \textbf{Transformación Temporal:} Conversión de \texttt{captured\_at} (Unix ms) a formato legible ISO 8601 (\texttt{YYYY-MM-DD HH:MM:SS}) y extracción de año/mes.
-    \item \textbf{Filtrado Geoespacial:} Recorte (\textit{spatial clip}) mediante polígonos delimitadores para mantener el enfoque en distritos piloto (San Isidro y Magdalena del Mar).
-    \item \textbf{Estandarización y Desduplicación:} Limpieza y desduplicación de las etiquetas de objetos dentro del arreglo \texttt{detections.value}.
+\begin{frame}{Muestra piloto y preparación}
+\begin{itemize}
+  \item La muestra de 10 imágenes validó el esquema antes de la recolección completa.
+  \item El dataset final conserva 9,938 imágenes tras eliminar duplicados y 568 puntos fuera de los límites distritales.
+  \item Se convierten tiempos Unix a UTC y se agregan detecciones repetidas en una tabla relacionada de 166,475 filas.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Preguntas de dominio}
+\begin{enumerate}
+  \item ¿Cómo varía la densidad de imágenes entre los tres distritos?
+  \item ¿Qué sectores contienen imágenes recientes y cuáles requieren actualización?
+  \item ¿Cómo se asocian cámara, panorámica y calidad de captura?
+  \item ¿Qué categorías de infraestructura detectada predominan por zona?
+  \item ¿Qué secuencias concentran mayor cobertura y qué patrones de orientación muestran?
 \end{enumerate}
-\newpage
-\section{Preguntas de Dominio (Domain Questions)}
-\begin{enumerate}[noitemsep]
-    \item \textbf{Evolución Temporal de Detecciones (IA):} ¿Cómo ha evolucionado la cantidad total detectada de objetos urbanos específicos (ej. señales de tránsito, infraestructura peatonal, vegetación) a lo largo de los años registrados en el dataset?
-    \item \textbf{Correlación de Hardware y Calidad:} ¿Existe una correlación directa entre el tipo de dispositivo de captura (\texttt{make}, \texttt{model}, \texttt{is\_pano}) y la calidad asignada a la foto (\texttt{quality\_score})?
-    \item \textbf{Densidad y Cobertura Distrital:} ¿Cómo se distribuye la densidad geográfica de fotografías a nivel de calle por distrito en el área de estudio y dónde se concentran los vacíos de información (\textit{data voids})?
-    \item \textbf{Antigüedad de Imágenes por Zona:} ¿Qué proporción de imágenes en cada distrito corresponde a datos obsoletos (capturados hace más de 3 años) versus datos recientes, y qué zonas requieren actualización prioritaria?
-    \item \textbf{Comportamiento y Rutas de Captura:} ¿Cuáles son las secuencias de trayecto (\texttt{sequence}) más extensas y qué orientaciones de cámara (\texttt{compass\_angle}) predominan en los flujos vehiculares y peatonales?
-    \item \textbf{Estudio Comparativo Internacional:} ¿Cómo se compara la densidad relativa y diversidad de objetos detectados por IA (señalética, infraestructura peatonal) entre el corredor de Lima y sectores urbanos equivalentes del Sur Global (Bogotá o El Cairo)?
-\end{enumerate}
+\end{frame}
 
-\section{Factibilidad Inicial, Retos Técnicos y Riesgos}
-\begin{itemize}[noitemsep]
-    \item \textbf{Extracción masiva y paginación restringida:} La API v4 exige peticiones paginadas en lotes reducidos (\texttt{limit=100}) para consultar objetos detectados por IA (\texttt{detections.value}), requiriendo un pipeline asíncrono con gestión de \textit{rate limits} y reintentos automáticos.
-    \item \textbf{Rendimiento de renderizado geoespacial:} Visualizar simultáneamente miles de puntos de imágenes, capas de calor por densidad distrital y vectores de orientación (\texttt{compass\_angle}) en un mapa interactivo sin ralentizar la interfaz web.
-    \item \textbf{Procesamiento comparativo internacional:} Normalizar e integrar volúmenes de datos adicionales de sectores urbanos de Bogotá y El Cairo para garantizar la paridad metodológica en las métricas de densidad.
+\begin{frame}{Factibilidad y plan inmediato}
+\begin{itemize}
+  \item Jeffry Hilario: adquisición, validación y tablas reproducibles.
+  \item Jeffry Vargas: cuadrícula, límites distritales y análisis espacial.
+  \item Fatima Villon: preguntas, narrativa, diseño e iteración con usuarios.
+  \item Riesgos: límites de la API, cobertura desigual y etiquetas repetidas; se mitigan con cuadrícula, registro de consultas y agregación de datos.
 \end{itemize}
-
+\end{frame}
 \end{document}

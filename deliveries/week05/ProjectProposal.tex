@@ -1,0 +1,51 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.25cm]{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true,urlcolor=blue!60!black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\title{Cobertura, actualidad y calidad de imágenes urbanas de Mapillary\\en el corredor Magdalena del Mar -- San Isidro -- Miraflores}
+\author{Equipo DINAMITA}
+\date{DS5343 Data Visualization --- Week 5 Proposal}
+\begin{document}
+\maketitle
+
+\section*{1. Equipo y dirección de trabajo}
+El equipo DINAMITA desarrollará una visualización analítica sobre las imágenes colaborativas a nivel de calle disponibles en Mapillary. Jeffry Arturo Hilario Quintana estará a cargo de la adquisición reproducible, validación y preparación de tablas; Jeffry Vargas liderará los límites geográficos, análisis espacial y visualización; y Fatima Margarita Villon Zarate definirá la experiencia de uso, narrativa y evaluación.
+
+Repositorio del proyecto: \url{https://github.com/jeffHQ/MapillaryVisualization}.
+
+\section*{2. Problema y contexto}
+La información visual urbana colaborativa puede ayudar a reconocer infraestructura, actualizar mapas y priorizar campañas de captura. Sin embargo, su disponibilidad no es uniforme: algunas calles tienen secuencias frecuentes y recientes, mientras que otras presentan pocos registros o datos antiguos. En Lima no basta con saber que existen imágenes; se necesita una forma de explorar dónde se concentran, cuán actuales son, qué tan buena es su calidad y qué elementos urbanos se detectan.
+
+El proyecto se enfoca deliberadamente en el corredor Magdalena del Mar -- San Isidro -- Miraflores. Este alcance permite una recolección verificable y una comparación significativa entre áreas urbanas contiguas, sin afirmar que una muestra limitada representa toda Lima Metropolitana.
+
+\section*{3. Audiencia y propósito}
+La audiencia incluye planificadores urbanos, gestores municipales, investigadores de movilidad y contribuidores de OpenStreetMap. La visualización les permitirá explorar la cobertura espacial, la recencia de las capturas y la calidad de la información visual, para identificar sectores que podrían requerir actualización o campañas de mapeo.
+
+\section*{4. Dataset y preparación esperada}
+La fuente será la \textit{Mapillary Graph API}. La unidad principal será una imagen georreferenciada, con identificador, geometría, instante de captura, secuencia, ángulo de cámara, tipo de cámara, marca, modelo, condición panorámica y puntuación de calidad. Una tabla relacionada almacenará las etiquetas de infraestructura detectadas por Mapillary y su frecuencia por imagen. Una capa de límites distritales permitirá resumir resultados territorialmente.
+
+La recolección se realizó mediante una cuadrícula documentada de 18 cajas geográficas pequeñas. La muestra piloto de 10 imágenes validó el esquema antes de la recolección; el paquete Week 4 ahora contiene 9,938 imágenes tras desduplicación y recorte espacial a los tres distritos, junto con 166,475 filas agregadas de detecciones. El periodo disponible va de abril de 2015 a agosto de 2026. El procesamiento convierte tiempos Unix a UTC, elimina duplicados por identificador, agrega etiquetas repetidas y registra celdas sin resultados o con errores. La cobertura es generada por contribuyentes, por lo que no equivale a un censo; las fechas, dispositivos, calidad y detecciones pueden ser desiguales o faltar.
+
+\newpage
+\section*{5. Preguntas de dominio}
+\begin{enumerate}
+  \item ¿Cómo varía la densidad de imágenes disponibles entre Magdalena del Mar, San Isidro y Miraflores?
+  \item ¿Qué sectores cuentan con imágenes recientes y cuáles muestran mayor antigüedad de captura?
+  \item ¿Cómo se asocian el tipo de cámara, la condición panorámica y la marca/modelo con la puntuación de calidad?
+  \item ¿Qué categorías de infraestructura urbana detectada predominan en cada distrito o sector?
+  \item ¿Qué secuencias reúnen mayor cobertura y qué patrones de orientación de cámara presentan?
+\end{enumerate}
+
+Estas preguntas forman una progresión: primero se examina si hay cobertura, luego su actualidad, después la confiabilidad de las capturas, el contenido detectado y finalmente las rutas que generaron dicha cobertura.
+
+\section*{6. Factibilidad, riesgos y plan}
+El proyecto es factible porque la colección actual confirma la disponibilidad de los atributos centrales y el repositorio incluye un proceso de adquisición sin credenciales. La principal restricción es que la API requiere consultas acotadas, paginación y un token local. Se mitigó mediante una cuadrícula reproducible, subdivisión automática de celdas densas, pausas entre peticiones, de-duplicación y un registro de resultados. Otro riesgo es atribuir demasiada importancia a áreas con pocas imágenes; la interfaz mostrará conteos y limitaciones junto con los resultados.
+
+La primera implementación visual tendrá un mapa de puntos o densidad, filtro temporal, resumen por distrito y vistas coordinadas de calidad, cámara y detecciones. El alcance excluye por ahora la comparación internacional; se prioriza una historia analítica consistente y una aplicación D3.js realizable.
+\end{document}

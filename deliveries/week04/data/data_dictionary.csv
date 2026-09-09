@@ -1,0 +1,21 @@
+field_name,table,description,data_type,unit_or_format,possible_values,missing_value_code
+geometry,images,Point geometry of the capture location,GeoJSON Point,"[longitude, latitude] WGS84",Valid longitude and latitude,null
+id_imagen,images,Unique Mapillary image identifier,string,Mapillary ID,Unique identifier,null
+longitud,images,Longitude extracted from geometry,float,WGS84 decimal degrees,-180 to 180,null
+latitud,images,Latitude extracted from geometry,float,WGS84 decimal degrees,-90 to 90,null
+fecha_captura_timestamp,images,Capture time reported by Mapillary,integer,Unix milliseconds UTC,Positive epoch milliseconds,null
+fecha_captura_utc,images,Readable UTC capture time derived from timestamp,datetime,ISO 8601 UTC,YYYY-MM-DDTHH:MM:SSZ,null
+distrito,images,District assigned by a point-in-polygon join against official district boundaries,string,administrative district,MAGDALENA DEL MAR; SAN ISIDRO; MIRAFLORES,null
+angulo_camara,images,Camera compass direction,float,degrees,0 to 360,null
+id_secuencia,images,Identifier of the continuous capture sequence,string,Mapillary sequence ID,Identifier or null,null
+url_miniatura,images,Mapillary thumbnail URL,string,URL,HTTPS URL,null
+tipo_camara,images,Capture projection type,string,category,perspective or spherical,null
+marca,images,Camera manufacturer reported by Mapillary,string,text,Manufacturer or none,none
+modelo,images,Camera model reported by Mapillary,string,text,Model or none,none
+es_panoramica,images,Whether the image is panoramic,boolean,true or false,true or false,null
+calidad,images,Mapillary predicted visual quality,float,score from 0 to 1,0 to 1,null
+cantidad_objetos_detectados,images,Total raw detections before grouping,integer,count,Nonnegative integer,0
+objetos_detectados,images,Raw object labels detected in the image,array,JSON-like list,Mapillary taxonomy labels,empty array
+id_imagen,detections,Foreign key to images.id_imagen,string,Mapillary ID,Existing image identifier,null
+objeto_detectado,detections,Mapillary object label,string,Mapillary taxonomy label,Category path,null
+conteo_objeto,detections,Number of repeated occurrences of a label in one image,integer,count,Positive integer,0

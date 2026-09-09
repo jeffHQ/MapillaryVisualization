@@ -1,0 +1,25 @@
+cell_id,bbox,queried_at_utc,max_images_requested,images_returned,status,notes
+magdalena_del_mar_01,"-77.080000,-12.100000,-77.070000,-12.090000",2026-09-09T11:52:48.448948Z,100,,error,500 Server Error: Internal Server Error for url: https://graph.mapillary.com/images?fields=id%2Cgeometry%2Ccomputed_geometry%2Ccaptured_at%2Ccompass_angle%2Csequence%2Cthumb_1024_url%2Ccamera_type%2Cmake%2Cmodel%2Cis_pano%2Cquality_score%2Cdetections.value&bbox=-77.080000%2C-12.100000%2C-77.070000%2
+magdalena_del_mar_01,"-77.080000,-12.100000,-77.070000,-12.090000",2026-09-09T11:53:06.385805Z,100,,error,500 Server Error: Internal Server Error for url: https://graph.mapillary.com/images?fields=id%2Cgeometry%2Ccomputed_geometry%2Ccaptured_at%2Ccompass_angle%2Csequence%2Cthumb_1024_url%2Ccamera_type%2Cmake%2Cmodel%2Cis_pano%2Cquality_score%2Cdetections.value&bbox=-77.080000%2C-12.100000%2C-77.070000%2
+san_isidro_01,"-77.060000,-12.110000,-77.050000,-12.100000",2026-09-09T11:54:05.532221Z,100,,error,500 Server Error: Internal Server Error for url: https://graph.mapillary.com/images?fields=id%2Cgeometry%2Ccomputed_geometry%2Ccaptured_at%2Ccompass_angle%2Csequence%2Cthumb_1024_url%2Ccamera_type%2Cmake%2Cmodel%2Cis_pano%2Cquality_score%2Cdetections.value&bbox=-77.060000%2C-12.110000%2C-77.050000%2
+miraflores_01,"-77.050000,-12.120000,-77.040000,-12.110000",2026-09-09T11:54:32.302706Z,100,,error,500 Server Error: Internal Server Error for url: https://graph.mapillary.com/images?fields=id%2Cgeometry%2Ccomputed_geometry%2Ccaptured_at%2Ccompass_angle%2Csequence%2Cthumb_1024_url%2Ccamera_type%2Cmake%2Cmodel%2Cis_pano%2Cquality_score%2Cdetections.value&bbox=-77.050000%2C-12.120000%2C-77.040000%2
+magdalena_del_mar_01,"-77.080000,-12.100000,-77.070000,-12.090000",2026-09-09T11:57:08.973573Z,50,167,success,successful subqueries: 7
+magdalena_del_mar_02,"-77.070000,-12.100000,-77.060000,-12.090000",2026-09-09T12:05:03.458379Z,100,653,success,successful subqueries: 10
+miraflores_01,"-77.050000,-12.120000,-77.040000,-12.110000",2026-09-09T12:08:29.165084Z,100,484,success,successful subqueries: 10
+miraflores_02,"-77.040000,-12.130000,-77.030000,-12.120000",2026-09-09T12:11:30.753899Z,100,1042,success,successful subqueries: 19
+miraflores_03,"-77.040000,-12.120000,-77.030000,-12.110000",2026-09-09T12:16:08.355589Z,100,893,success,successful subqueries: 16
+miraflores_04,"-77.030000,-12.140000,-77.020000,-12.130000",2026-09-09T12:19:42.465733Z,100,,error,500 Server Error: Internal Server Error for url: https://graph.mapillary.com/images?fields=id%2Cgeometry%2Ccomputed_geometry%2Ccaptured_at%2Ccompass_angle%2Csequence%2Cthumb_1024_url%2Ccamera_type%2Cmake%2Cmodel%2Cis_pano%2Cquality_score%2Cdetections.value&bbox=-77.03%2C-12.1325%2C-77.0275%2C-12.13&
+miraflores_05,"-77.030000,-12.130000,-77.020000,-12.120000",2026-09-09T12:22:12.767905Z,100,,error,500 Server Error: Internal Server Error for url: https://graph.mapillary.com/images?fields=id%2Cgeometry%2Ccomputed_geometry%2Ccaptured_at%2Ccompass_angle%2Csequence%2Cthumb_1024_url%2Ccamera_type%2Cmake%2Cmodel%2Cis_pano%2Cquality_score%2Cdetections.value&bbox=-77.025%2C-12.13%2C-77.02250000000001%
+miraflores_06,"-77.020000,-12.130000,-77.010000,-12.120000",2026-09-09T12:25:05.519794Z,100,563,success,successful subqueries: 7
+miraflores_07,"-77.010000,-12.130000,-77.000000,-12.120000",2026-09-09T12:27:14.994737Z,100,229,success,successful subqueries: 4
+san_isidro_01,"-77.060000,-12.110000,-77.050000,-12.100000",2026-09-09T12:28:57.692539Z,100,535,success,successful subqueries: 10
+san_isidro_02,"-77.060000,-12.100000,-77.050000,-12.090000",2026-09-09T12:31:22.529744Z,100,817,success,successful subqueries: 16
+san_isidro_03,"-77.050000,-12.110000,-77.040000,-12.100000",2026-09-09T12:35:08.060142Z,100,359,success,successful subqueries: 4
+san_isidro_04,"-77.050000,-12.100000,-77.040000,-12.090000",2026-09-09T12:36:36.121900Z,100,772,success,successful subqueries: 13
+san_isidro_05,"-77.040000,-12.110000,-77.030000,-12.100000",2026-09-09T12:39:18.859277Z,100,743,success,successful subqueries: 13
+san_isidro_06,"-77.040000,-12.100000,-77.030000,-12.090000",2026-09-09T12:42:27.340761Z,100,683,success,successful subqueries: 16
+san_isidro_07,"-77.030000,-12.100000,-77.020000,-12.090000",2026-09-09T12:46:24.548268Z,100,838,success,successful subqueries: 16
+san_isidro_08,"-77.020000,-12.110000,-77.010000,-12.100000",2026-09-09T12:49:55.033363Z,100,267,success,successful subqueries: 4
+san_isidro_09,"-77.020000,-12.100000,-77.010000,-12.090000",2026-09-09T12:51:03.834006Z,100,335,success,successful subqueries: 4
+miraflores_04,"-77.030000,-12.140000,-77.020000,-12.130000",2026-09-09T12:55:58.891836Z,50,529,success,successful subqueries: 16
+miraflores_05,"-77.030000,-12.130000,-77.020000,-12.120000",2026-09-09T12:59:27.646075Z,50,597,success,successful subqueries: 28

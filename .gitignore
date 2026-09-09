@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+deliveries/week04/data/raw_cells/
+deliveries/week04/data/token_test.geojson
