@@ -1,51 +1,75 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt]{article}
+\usepackage[margin=0.67in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
-\usepackage[margin=2.25cm]{geometry}
-\usepackage{hyperref}
 \usepackage{xcolor}
-\hypersetup{colorlinks=true,urlcolor=blue!60!black}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{teal}{HTML}{147D82}
+\definecolor{coral}{HTML}{D9654F}
+\definecolor{mist}{HTML}{EEF3F5}
+\hypersetup{colorlinks=true,urlcolor=teal,linkcolor=navy}
+\setlength{\parskip}{4pt}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.45em}
-\title{Cobertura, actualidad y calidad de imágenes urbanas de Mapillary\\en el corredor Magdalena del Mar -- San Isidro -- Miraflores}
-\author{Equipo DINAMITA}
-\date{DS5343 Data Visualization --- Week 5 Proposal}
+
 \begin{document}
-\maketitle
 
-\section*{1. Equipo y dirección de trabajo}
-El equipo DINAMITA desarrollará una visualización analítica sobre las imágenes colaborativas a nivel de calle disponibles en Mapillary. Jeffry Arturo Hilario Quintana estará a cargo de la adquisición reproducible, validación y preparación de tablas; Jeffry Vargas liderará los límites geográficos, análisis espacial y visualización; y Fatima Margarita Villon Zarate definirá la experiencia de uso, narrativa y evaluación.
+{\color{navy}\LARGE\textbf{Una Lima, dos realidades}}\\[-2pt]
+{\large Brechas en la infraestructura urbana observable entre San Isidro y San Juan de Lurigancho}
 
-Repositorio del proyecto: \url{https://github.com/jeffHQ/MapillaryVisualization}.
+\vspace{4pt}
+\small
+\textbf{Equipo:} DINAMITA --- Jeffry Arturo Hilario Quintana, Jeffry Vargas y Fatima Margarita Villon Zarate.\\
+\textbf{Repositorio:} \url{https://github.com/jeffHQ/MapillaryVisualization}
 
-\section*{2. Problema y contexto}
-La información visual urbana colaborativa puede ayudar a reconocer infraestructura, actualizar mapas y priorizar campañas de captura. Sin embargo, su disponibilidad no es uniforme: algunas calles tienen secuencias frecuentes y recientes, mientras que otras presentan pocos registros o datos antiguos. En Lima no basta con saber que existen imágenes; se necesita una forma de explorar dónde se concentran, cuán actuales son, qué tan buena es su calidad y qué elementos urbanos se detectan.
+\hrule\vspace{7pt}
 
-El proyecto se enfoca deliberadamente en el corredor Magdalena del Mar -- San Isidro -- Miraflores. Este alcance permite una recolección verificable y una comparación significativa entre áreas urbanas contiguas, sin afirmar que una muestra limitada representa toda Lima Metropolitana.
+\section*{1. Problema, contexto y propósito}
 
-\section*{3. Audiencia y propósito}
-La audiencia incluye planificadores urbanos, gestores municipales, investigadores de movilidad y contribuidores de OpenStreetMap. La visualización les permitirá explorar la cobertura espacial, la recencia de las capturas y la calidad de la información visual, para identificar sectores que podrían requerir actualización o campañas de mapeo.
+Una misma ciudad puede ofrecer experiencias urbanas muy distintas. Las personas caminan, cruzan vías, esperan transporte y se orientan mediante una combinación de veredas, cruces, señales, marcas viales e iluminación. Sin embargo, esas condiciones no siempre se presentan de la misma forma en todos los distritos de Lima Metropolitana.
 
-\section*{4. Dataset y preparación esperada}
-La fuente será la \textit{Mapillary Graph API}. La unidad principal será una imagen georreferenciada, con identificador, geometría, instante de captura, secuencia, ángulo de cámara, tipo de cámara, marca, modelo, condición panorámica y puntuación de calidad. Una tabla relacionada almacenará las etiquetas de infraestructura detectadas por Mapillary y su frecuencia por imagen. Una capa de límites distritales permitirá resumir resultados territorialmente.
+El proyecto explora \textbf{cómo cambia la evidencia visual de infraestructura peatonal y vial} entre zonas urbanas comparables de San Isidro y San Juan de Lurigancho. Elegimos el contraste por su relevancia socioeconómica, no para etiquetar a sus habitantes ni para concluir que un distrito es ``mejor'' que otro. El Mapa de Pobreza del INEI brinda un contexto histórico verificable: para 2013 registra un intervalo de pobreza total de 0,0--0,3\% en San Isidro y grupos territoriales de 10,0--41,1\% en San Juan de Lurigancho.\footnote{INEI, \href{https://www.inei.gob.pe/media/DocumentosPublicos/pobreza/2013/Mapa-de-pobreza-provincial-y-distrital-2013.pdf}{Mapa de Pobreza Provincial y Distrital 2013}, cuadro 2.}
 
-La recolección se realizó mediante una cuadrícula documentada de 18 cajas geográficas pequeñas. La muestra piloto de 10 imágenes validó el esquema antes de la recolección; el paquete Week 4 ahora contiene 9,938 imágenes tras desduplicación y recorte espacial a los tres distritos, junto con 166,475 filas agregadas de detecciones. El periodo disponible va de abril de 2015 a agosto de 2026. El procesamiento convierte tiempos Unix a UTC, elimina duplicados por identificador, agrega etiquetas repetidas y registra celdas sin resultados o con errores. La cobertura es generada por contribuyentes, por lo que no equivale a un censo; las fechas, dispositivos, calidad y detecciones pueden ser desiguales o faltar.
+La visualización estará dirigida a estudiantes e investigadores de urbanismo, organizaciones de movilidad activa y equipos municipales. Su propósito es permitirles \textbf{explorar contrastes espaciales y formular prioridades de revisión}, no sustituir una auditoría técnica ni emitir una calificación de seguridad vial.
 
-\newpage
-\section*{5. Preguntas de dominio}
+\textbf{¿Por qué visualizarlo?} El fenómeno es simultáneamente espacial, categórico y temporal: miles de imágenes, sus ubicaciones, sus fechas y los elementos detectados no se entienden en una tabla. Un mapa interactivo permite comparar ambas zonas, filtrar categorías y abrir la imagen que sostiene cada observación. Esto vuelve trazable la discusión: el usuario puede pasar de un patrón agregado a la evidencia visual concreta.
+
+\section*{2. Dataset y metodología propuesta}
+
+El dataset principal será reconstruido para esta propuesta. Se recolectarán imágenes georreferenciadas mediante la \textit{Mapillary Graph API} en \textbf{tres zonas de estudio equivalentes por distrito}, usando la misma cuadrícula, tamaño de celda, límite de imágenes y reglas de deduplicación. Trabajar con zonas comparables, en vez de descargar por completo ambos distritos, mantiene el alcance realizable y evita que el tamaño desigual de San Juan de Lurigancho domine la comparación.
+
+\begin{tabularx}{\linewidth}{@{}p{0.24\linewidth}X@{}}
+\toprule
+\textbf{Fuente} & \textbf{Uso en el proyecto} \\
+\midrule
+Mapillary Graph API & Coordenadas, fecha de captura, secuencia, orientación, calidad, enlace de miniatura y detecciones de objetos. Mapillary es una fuente de evidencia, no el objeto de evaluación. \\
+INEI & Indicador socioeconómico histórico para justificar el contraste territorial; no se usa para inferir la condición de una persona o cuadra particular. \\
+Límites oficiales & Delimitación y asignación de cada imagen a su distrito y zona de estudio. \\
+OpenStreetMap (si se incorpora) & Red vial como denominador complementario para comparar por tramo, no solo por cantidad de imágenes. \\
+\bottomrule
+\end{tabularx}
+
+La tabla principal tendrá una fila por imagen; una tabla relacionada agregará las detecciones por \texttt{id\_imagen} y categoría. Las categorías se agruparán en: infraestructura peatonal (vereda, cruce cebra, rebaje), regulación vial (señales, semáforos, marcas), soporte urbano (postes e iluminación), movilidad y entorno. Antes del análisis se eliminarán IDs duplicados, se validará la geometría, se normalizarán fechas y categorías, y se registrará la cobertura temporal.
+
+\textbf{Límite central.} Una detección automática en una imagen es evidencia de que un elemento fue observado desde ese punto de vista; su ausencia no demuestra que el elemento no exista ni mide su estado físico. Por ello, los indicadores se expresarán por 100 imágenes o por tramo cuando corresponda, y cada resultado podrá inspeccionarse mediante su imagen de origen.
+
+\section*{3. Preguntas que guiarán las visualizaciones}
+
 \begin{enumerate}
-  \item ¿Cómo varía la densidad de imágenes disponibles entre Magdalena del Mar, San Isidro y Miraflores?
-  \item ¿Qué sectores cuentan con imágenes recientes y cuáles muestran mayor antigüedad de captura?
-  \item ¿Cómo se asocian el tipo de cámara, la condición panorámica y la marca/modelo con la puntuación de calidad?
-  \item ¿Qué categorías de infraestructura urbana detectada predominan en cada distrito o sector?
-  \item ¿Qué secuencias reúnen mayor cobertura y qué patrones de orientación de cámara presentan?
+  \item ¿Cómo varía la disponibilidad y actualidad de evidencia visual entre las zonas de ambos distritos?
+  \item ¿Qué categorías de infraestructura peatonal y vial aparecen con mayor frecuencia por cada 100 imágenes en cada zona?
+  \item ¿Dónde se concentran espacialmente las detecciones de cruces, veredas, señalización, iluminación y marcas viales?
+  \item ¿Qué contrastes persisten al comparar zonas equivalentes, en lugar de conteos brutos por distrito?
+  \item ¿Qué imágenes y secuencias permiten contextualizar los patrones agregados hallados en el mapa?
+  \item ¿Qué sesgos de cobertura, fecha, cámara o detección limitan la comparación y qué áreas requieren verificación posterior?
 \end{enumerate}
 
-Estas preguntas forman una progresión: primero se examina si hay cobertura, luego su actualidad, después la confiabilidad de las capturas, el contenido detectado y finalmente las rutas que generaron dicha cobertura.
+\section*{4. Factibilidad, plan y riesgos}
 
-\section*{6. Factibilidad, riesgos y plan}
-El proyecto es factible porque la colección actual confirma la disponibilidad de los atributos centrales y el repositorio incluye un proceso de adquisición sin credenciales. La principal restricción es que la API requiere consultas acotadas, paginación y un token local. Se mitigó mediante una cuadrícula reproducible, subdivisión automática de celdas densas, pausas entre peticiones, de-duplicación y un registro de resultados. Otro riesgo es atribuir demasiada importancia a áreas con pocas imágenes; la interfaz mostrará conteos y limitaciones junto con los resultados.
+El equipo reutilizará el proceso de adquisición ya desarrollado, pero con una cuadrícula simétrica y un diccionario adaptado al nuevo objetivo. Jeffry Arturo Hilario Quintana liderará la adquisición, limpieza y trazabilidad; Jeffry Vargas la preparación espacial, comparación y visualización; y Fatima Margarita Villon Zarate la narrativa, experiencia de usuario y evaluación. El mayor riesgo es la cobertura desigual de Mapillary o respuestas inestables de la API. Se mitigará con subconsultas, reintentos, un registro de adquisición, reglas de exclusión explícitas y normalización por imágenes/tramos. La entrega posterior incluirá una interfaz D3 con mapa, filtros por categoría y fecha, comparación entre zonas e inspección de evidencia.
 
-La primera implementación visual tendrá un mapa de puntos o densidad, filtro temporal, resumen por distrito y vistas coordinadas de calidad, cámara y detecciones. El alcance excluye por ahora la comparación internacional; se prioriza una historia analítica consistente y una aplicación D3.js realizable.
 \end{document}

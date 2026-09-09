@@ -1,69 +1,164 @@
 \documentclass[aspectratio=169,10pt]{beamer}
-\usetheme{default}
-\usecolortheme{default}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usepackage{booktabs}
+\usepackage{tabularx}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{teal}{HTML}{147D82}
+\definecolor{coral}{HTML}{D9654F}
+\definecolor{mist}{HTML}{EEF3F5}
+\definecolor{sand}{HTML}{F7F1E8}
+\setbeamercolor{normal text}{fg=navy,bg=white}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{structure}{fg=teal}
+\setbeamercolor{title}{fg=navy}
+\setbeamercolor{block title}{fg=white,bg=teal}
+\setbeamercolor{block body}{fg=navy,bg=mist}
 \setbeamertemplate{navigation symbols}{}
-\setbeamercolor{structure}{fg=blue!65!black}
-\title{Cobertura, actualidad y calidad de imágenes urbanas de Mapillary}
-\subtitle{Corredor Magdalena del Mar -- San Isidro -- Miraflores}
-\author{Equipo DINAMITA: Jeffry Arturo Hilario Quintana, Jeffry Vargas, Fatima Margarita Villon Zarate}
-\date{Week 5 -- DS5343 Data Visualization}
+\setbeamertemplate{footline}{\hfill\color{teal}\scriptsize DINAMITA \quad \insertframenumber/\inserttotalframenumber\hspace{0.6cm}\vspace{0.25cm}}
+\setbeamertemplate{itemize item}{\color{coral}$\blacktriangleright$}
+\setlength{\tabcolsep}{5pt}
+
+\newcommand{\tagbox}[2]{\colorbox{#1}{\parbox[c][0.7cm][c]{0.92\linewidth}{\centering\color{white}\textbf{#2}}}}
 
 \begin{document}
-\begin{frame}\titlepage\end{frame}
 
-\begin{frame}{Problema y motivación}
+\begin{frame}[plain]
+  \vspace{0.55cm}
+  {\color{coral}\Large\textbf{PROPUESTA DE PROYECTO}}\\[0.4cm]
+  {\color{navy}\fontsize{27}{31}\selectfont\textbf{Una Lima, dos realidades}}\\[0.25cm]
+  {\large Brechas en la infraestructura urbana observable entre\\ San Isidro y San Juan de Lurigancho}\\[0.8cm]
+  \tagbox{teal}{Una ciudad \quad|\quad dos contextos urbanos \quad|\quad evidencia visual verificable}\\[0.55cm]
+  \small DINAMITA: Jeffry Arturo Hilario Quintana, Jeffry Vargas y Fatima Margarita Villon Zarate
+\end{frame}
+
+\begin{frame}{El problema no es Mapillary}
+\begin{center}
+\Large\textbf{¿Qué cambia en la calle cuando cambia el distrito?}\\[0.25cm]
+\normalsize Queremos explorar la evidencia visual de los elementos que acompañan el desplazamiento cotidiano.
+\end{center}
+\vspace{0.45cm}
+\begin{columns}[T,onlytextwidth]
+\column{0.31\textwidth}
+\colorbox{sand}{\parbox[c][2.7cm][c]{0.96\linewidth}{\centering\Large\textbf{San Isidro}\\[5pt]\normalsize Zona de estudio\newline de alto perfil socioeconómico}}
+\column{0.38\textwidth}
+\centering\vspace{0.55cm}
+{\color{coral}\Large\textbf{MISMA LIMA}}\\[6pt]
+\small Veredas \quad Cruces \quad Señales\\ Iluminación \quad Marcas viales
+\column{0.31\textwidth}
+\colorbox{mist}{\parbox[c][2.7cm][c]{0.96\linewidth}{\centering\Large\textbf{San Juan de Lurigancho}\\[5pt]\normalsize Zona de estudio\newline de perfil socioeconómico contrastante}}
+\end{columns}
+\vspace{0.35cm}
+\centering\scriptsize No se califican personas ni distritos; se exploran patrones de infraestructura \emph{observada} en imágenes.
+\end{frame}
+
+\begin{frame}{Por qué esta comparación importa}
+\begin{columns}[T,onlytextwidth]
+\column{0.53\textwidth}
+\begin{block}{Una experiencia urbana depende de una cadena}
+Una ruta no se vuelve caminable o segura por un único elemento. Importan, en conjunto, veredas, cruces, regulación vial, iluminación y continuidad espacial.
+\end{block}
+\column{0.43\textwidth}
+\colorbox{navy}{\parbox[c][3.2cm][c]{0.95\linewidth}{\centering\color{white}\Large\textbf{La desigualdad urbana\\se hace visible\\en el espacio.}}}
+\end{columns}
+\vspace{0.55cm}
+\begin{center}
+\large La meta es generar preguntas y prioridades de revisión, \textbf{no reemplazar una auditoría técnica de campo}.
+\end{center}
+\end{frame}
+
+\begin{frame}{Una comparación justa necesita el mismo protocolo}
+\begin{center}\large\textbf{No compararemos distritos completos ni conteos brutos.}\end{center}
+\vspace{0.35cm}
+\begin{columns}[c,onlytextwidth]
+\column{0.26\textwidth}\tagbox{teal}{3 zonas comparables\\San Isidro}
+\column{0.10\textwidth}\centering\Large$\longrightarrow$
+\column{0.28\textwidth}\colorbox{mist}{\parbox[c][1.35cm][c]{0.96\linewidth}{\centering\textbf{Misma cuadrícula}\\mismo tamaño, límite y limpieza}}
+\column{0.10\textwidth}\centering\Large$\longrightarrow$
+\column{0.26\textwidth}\tagbox{coral}{3 zonas comparables\\San Juan de Lurigancho}
+\end{columns}
+\vspace{0.65cm}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Se comparará} & \textbf{No se afirmará} & \textbf{Unidad} \\
+\midrule
+Patrones observados & Estado físico definitivo & Por 100 imágenes / tramo \\
+Actualidad y cobertura & Ausencia real de un elemento & Zona comparable \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Datos: Mapillary es la fuente, no el tema}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\colorbox{mist}{\parbox[c][3.3cm][c]{0.96\linewidth}{\centering\Large\textbf{Mapillary}\\[8pt]\small Imágenes georreferenciadas\\fecha, secuencia, orientación, calidad y detecciones}}
+\column{0.32\textwidth}
+\colorbox{sand}{\parbox[c][3.3cm][c]{0.96\linewidth}{\centering\Large\textbf{INEI}\\[8pt]\small Contexto socioeconómico histórico para justificar el contraste territorial}}
+\column{0.32\textwidth}
+\colorbox{mist}{\parbox[c][3.3cm][c]{0.96\linewidth}{\centering\Large\textbf{Límites / red vial}\\[8pt]\small Asignación territorial y, si aplica, normalización por tramo}}
+\end{columns}
+\vspace{0.55cm}
+\begin{center}\large Dataset nuevo: imágenes únicas + tabla relacionada de detecciones por categoría.\end{center}
+\end{frame}
+
+\begin{frame}{Preguntas que la visualización debe responder}
+\small
+\begin{columns}[T,onlytextwidth]
+\column{0.49\textwidth}
 \begin{itemize}
-  \item Lima cuenta con imágenes colaborativas a nivel de calle, pero su cobertura y actualidad son desiguales.
-  \item Planificadores urbanos y contribuidores de OpenStreetMap necesitan reconocer vacíos de información y datos desactualizados.
-  \item El proyecto convierte metadatos de Mapillary en evidencia espacial, temporal y de calidad de captura.
+  \item ¿Qué tan reciente y disponible es la evidencia visual en cada zona?
+  \item ¿Qué elementos peatonales y viales aparecen con mayor frecuencia por 100 imágenes?
+  \item ¿Dónde se concentran cruces, veredas, señales, iluminación y marcas viales?
 \end{itemize}
-\end{frame}
-
-\begin{frame}{Audiencia y propósito}
-\textbf{Audiencia:} planificadores urbanos, gestores municipales, investigadores de movilidad y contribuidores de OpenStreetMap.\medskip
-
-\textbf{Propósito:} permitir explorar dónde, cuándo y con qué calidad se han capturado imágenes urbanas en el corredor de estudio, para identificar sectores prioritarios de actualización.
-\end{frame}
-
-\begin{frame}{Dataset principal propuesto}
+\column{0.49\textwidth}
 \begin{itemize}
-  \item Área: Magdalena del Mar, San Isidro y Miraflores.
-  \item Fuente: Mapillary Graph API; recolección reproducible mediante cuadrícula de cajas pequeñas.
-  \item Colección actual: 18 celdas, 9,938 imágenes válidas y 1,915 secuencias.
-  \item Periodo disponible: abril de 2015 a agosto de 2026.
-  \item Tabla de detecciones: etiqueta de objeto y frecuencia por imagen.
-  \item Capa de referencia: límites distritales.
+  \item ¿Qué contrastes persisten entre zonas equivalentes?
+  \item ¿Qué imagen o secuencia explica cada patrón agregado?
+  \item ¿Qué sesgos o vacíos impiden una conclusión fuerte?
 \end{itemize}
+\end{columns}
+\vspace{0.45cm}
+\colorbox{navy}{\parbox[c][1.1cm][c]{0.98\linewidth}{\centering\color{white}\large La interfaz conectará el mapa, los filtros comparativos y la evidencia fotográfica.}}
 \end{frame}
 
-\begin{frame}{Muestra piloto y preparación}
-\begin{itemize}
-  \item La muestra de 10 imágenes validó el esquema antes de la recolección completa.
-  \item El dataset final conserva 9,938 imágenes tras eliminar duplicados y 568 puntos fuera de los límites distritales.
-  \item Se convierten tiempos Unix a UTC y se agregan detecciones repetidas en una tabla relacionada de 166,475 filas.
-\end{itemize}
+\begin{frame}{Qué podrá hacer el usuario}
+\begin{columns}[T,onlytextwidth]
+\column{0.31\textwidth}
+\centering{\color{teal}\Huge 1}\\[4pt]\textbf{Comparar}\\[4pt]\small zonas equivalentes y tasas normalizadas.
+\column{0.31\textwidth}
+\centering{\color{coral}\Huge 2}\\[4pt]\textbf{Explorar}\\[4pt]\small categorías, fecha y cobertura espacial.
+\column{0.31\textwidth}
+\centering{\color{teal}\Huge 3}\\[4pt]\textbf{Verificar}\\[4pt]\small el patrón agregado con la imagen de origen.
+\end{columns}
+\vspace{0.8cm}
+\begin{center}
+\Large\textbf{De una desigualdad abstracta a evidencia urbana explorable.}
+\end{center}
 \end{frame}
 
-\begin{frame}{Preguntas de dominio}
-\begin{enumerate}
-  \item ¿Cómo varía la densidad de imágenes entre los tres distritos?
-  \item ¿Qué sectores contienen imágenes recientes y cuáles requieren actualización?
-  \item ¿Cómo se asocian cámara, panorámica y calidad de captura?
-  \item ¿Qué categorías de infraestructura detectada predominan por zona?
-  \item ¿Qué secuencias concentran mayor cobertura y qué patrones de orientación muestran?
-\end{enumerate}
+\begin{frame}{Factibilidad y compromiso metodológico}
+\begin{columns}[T,onlytextwidth]
+\column{0.49\textwidth}
+\begin{block}{Plan}
+\small Recolectar seis zonas con el mismo protocolo, deduplicar, normalizar categorías y construir la interfaz D3.
+\end{block}
+\begin{block}{Riesgo principal}
+\small Cobertura desigual o fallas de la API. Se mitiga con subconsultas, reintentos, bitácora y reglas explícitas de exclusión.
+\end{block}
+\column{0.47\textwidth}
+\begin{block}{Roles}
+\small \textbf{Jeffry Arturo:} adquisición y limpieza.\\
+\textbf{Jeffry Vargas:} análisis espacial y visualización.\\
+\textbf{Fatima:} narrativa, UX y evaluación.
+\end{block}
+\colorbox{sand}{\parbox[c][1.25cm][c]{0.96\linewidth}{\centering\textbf{Rigor:} la ausencia de una detección no prueba ausencia de infraestructura.}}
+\end{columns}
+\vfill
+\centering\color{navy}\large\textbf{Una Lima, dos realidades. Una comparación que el usuario puede inspeccionar.}
 \end{frame}
 
-\begin{frame}{Factibilidad y plan inmediato}
-\begin{itemize}
-  \item Jeffry Hilario: adquisición, validación y tablas reproducibles.
-  \item Jeffry Vargas: cuadrícula, límites distritales y análisis espacial.
-  \item Fatima Villon: preguntas, narrativa, diseño e iteración con usuarios.
-  \item Riesgos: límites de la API, cobertura desigual y etiquetas repetidas; se mitigan con cuadrícula, registro de consultas y agregación de datos.
-\end{itemize}
-\end{frame}
 \end{document}
